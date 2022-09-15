@@ -76,6 +76,7 @@ else:
 print(y1,x1)
 
 
+
 # Distance between points in 100x100 grid
 
 dist = ((y0 - y1)**2 + (x0 - x1)**2)**0.5
