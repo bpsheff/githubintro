@@ -5,79 +5,81 @@ Spyder Editor
 This is a temporary script file.
 """
 
-# Create variables
+# Create variables and empty agents list
 
 import random
 
-y0 = random.randint(0,99)
-x0 = random.randint(0,99)
+random.seed(1)
 
-print(y0)
-print(x0)
+agents = []
 
-# Random walk one step
-
-if y0 < 50:
-    y0 += 1
-else:
-    y0 -= 1
-
-if x0 < 50:
-    x0 += 1
-else:
-    x0 -= 1
-
-print(y0,x0)
-
-if y0 < 50:
-    y0 += 1
-else:
-    y0 -= 1
-
-if x0 < 50:
-    x0 += 1
-else:
-    x0 -= 1
-
-print(y0,x0)
+agents.append([random.randint(0,99), random.randint(0,99)])
+agents.append([random.randint(0,99), random.randint(0,99)])
 
 
+# Include coordinates at end of agents list
 
+#agents.append([y0,x0])
 
-# Create variables
-y1 = random.randint(0,99)
-x1 = random.randint(0,99)
+print(agents)
 
 # Random walk one step
 
-if y1 < 0.5:
-    y1 += 1
+## Randomly change y0 by 1
+
+if random.randint(0,1) == 0:
+    agents[0][0] += 1
 else:
-    y1 -= 1
+    agents[0][0] -= 1
 
-if x1 < 0.5:
-    x1 += 1
+## Randomly change x0 by 1
+
+if random.randint(0,1) == 0:
+    print("a")
+    agents[0][1] += 1
 else:
-    x1 -= 1
+    print("b")
+    agents[0][1] -= 1
 
-print(y1,x1)
 
 
-if y1 < 0.5:
-    y1 += 1
+#if agents[0][0] < 50:
+#    agents[0][0] += 1
+#else:
+#    agents[0][0] -= 1
+#
+#if agents[0][1] < 50:
+#    agents[0][1] += 1
+#else:
+#    agents[0][1] -= 1
+
+
+## Randomly change y1 by 1
+    
+if random.randint(0,1) == 0:
+    agents[1][0] += 1
 else:
-    y1 -= 1
+    agents[1][0] -= 1
+  
+#if agents[1][0] < 50:
+#    agents[1][0] += 1
+#else:
+#    agents[1][0] -= 1
 
-if x1 < 0.5:
-    x1 += 1
+## Randomly change x1 by 1
+
+if random.randint(0,1) == 0:
+    agents[1][1] += 1
 else:
-    x1 -= 1
+    agents[1][1] -= 1
 
-print(y1,x1)
+
+
+print(agents)
 
 
 
 # Distance between points in 100x100 grid
 
-dist = ((y0 - y1)**2 + (x0 - x1)**2)**0.5
+dist = ((agents[0][0] - agents[1][0])**2 + (agents[0][1] - agents[1][1])**2)**0.5
 print(dist)
