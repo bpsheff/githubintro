@@ -11,13 +11,13 @@ import random
 import operator
 import matplotlib.pyplot
 
-num_agents = 10
+num_agents = 20
 
 random.seed(1)
 
 agents = []
 
-for i in range(20):
+for i in range(num_agents):
     agents.append([random.randint(0,99), random.randint(0,99)])
 agents.append([random.randint(0,99), random.randint(0,99)])
 
@@ -106,22 +106,26 @@ for i in range(len(agents)):
 #matplotlib.pyplot.scatter(agents[1][1],agents[1][0])
 #matplotlib.pyplot.scatter(agents[2][1],agents[2][0])
 #matplotlib.pyplot.scatter(agents[3][1],agents[3][0])
+
 bottom = min(agents, key=operator.itemgetter(0))
 print(bottom)
 matplotlib.pyplot.scatter(bottom[1], bottom[0], color='BLACK')
+
 top = max(agents, key=operator.itemgetter(0))
 print(top)
 matplotlib.pyplot.scatter(top[1], top[0], color='RED')
+
 right = max(agents, key=operator.itemgetter(1))
 print(right)
 matplotlib.pyplot.scatter(right[1], right[0], color='GREEN')
+
 left = min(agents, key=operator.itemgetter(1))
 print(left)
 matplotlib.pyplot.scatter(left[1], left[0], color='YELLOW')
 
 ##Change colour of furthest east agent
 
-###Use highest x-coordinate to indicate the agent furthest east
+###Use largest x-coordinate to indicate the agent furthest east
 
 #if x = max(agents, key=operator.itemgetter(1)):
 #    matplotlib.pyplot.scatter(x-coordinate, y-coordinate, color='red')
