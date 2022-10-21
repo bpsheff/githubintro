@@ -9,7 +9,9 @@ import random
 import operator
 import matplotlib.pyplot
 
-# def distance_between(agents_row_a, agents_row_b):
+def distance_between(agents_row_a, agents_row_b):
+    # type()
+    return (((agents_row_a[0] - agents_row_a[1])**2 + (agents_row_b[0] - agents_row_b[1])**2))**0.5
 
 num_of_agents = 10
 num_of_iterations = 100
@@ -44,3 +46,6 @@ matplotlib.pyplot.show()
 
 distance = distance_between(agents[0], agents[1])
 print(distance)
+
+for i in range(num_of_agents):
+    distance_between(agents[i][0], agents[i][1])

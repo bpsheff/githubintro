@@ -13,6 +13,8 @@ import matplotlib.pyplot
 
 num_agents = 20
 
+num_iterations = 100
+
 random.seed(1)
 
 agents = []
@@ -30,55 +32,53 @@ agents.append([16, 5])
 
 print(agents)
 
-# Random walk one step
+# Random walk one step an arbitrary number of times
 
-## Randomly change y0 by 1
+for j in range(num_iterations):
+    for i in range(num_agents):
+        if random.randint(0,1) == 0:
+            agents[i][0] += 1
+        else:
+            agents[i][0] -= 1
 
-if random.randint(0,1) == 0:
-    agents[0][0] += 1
-else:
-    agents[0][0] -= 1
+# # Second time
 
-## Randomly change x0 by 1
-
-if random.randint(0,1) == 0:
-    print("a")
-    agents[0][1] += 1
-else:
-    print("b")
-    agents[0][1] -= 1
-
+# for i in range(num_agents):
+#     if random.randint(0,1) == 0:
+#         agents[0][i] += 1
+#     else:
+#         agents[0][i] -= 1
 
 
-#if agents[0][0] < 50:
-#    agents[0][0] += 1
-#else:
-#    agents[0][0] -= 1
-#
-#if agents[0][1] < 50:
-#    agents[0][1] += 1
-#else:
-#    agents[0][1] -= 1
+# ## Randomly change y0 by 1
 
+# if random.randint(0,1) == 0:
+#     agents[0][0] += 1
+# else:
+#     agents[0][0] -= 1
 
-## Randomly change y1 by 1
+# ## Randomly change x0 by 1
+
+# if random.randint(0,1) == 0:
+#     print("a")
+#     agents[0][1] += 1
+# else:
+#     print("b")
+#     agents[0][1] -= 1
+
+# ## Randomly change y1 by 1
     
-if random.randint(0,1) == 0:
-    agents[1][0] += 1
-else:
-    agents[1][0] -= 1
-  
-#if agents[1][0] < 50:
-#    agents[1][0] += 1
-#else:
-#    agents[1][0] -= 1
+# if random.randint(0,1) == 0:
+#     agents[1][0] += 1
+# else:
+#     agents[1][0] -= 1
 
-## Randomly change x1 by 1
+# ## Randomly change x1 by 1
 
-if random.randint(0,1) == 0:
-    agents[1][1] += 1
-else:
-    agents[1][1] -= 1
+# if random.randint(0,1) == 0:
+#     agents[1][1] += 1
+# else:
+#     agents[1][1] -= 1
 
 
 print(agents)
@@ -90,22 +90,29 @@ print("min(agents, key=operator.itemgetter(0))", min(agents, key=operator.itemge
 print("min(agents, key=operator.itemgetter(1))", min(agents, key=operator.itemgetter(1)))
 
 
-# Distance between points in 100x100 grid
+## Distance between points in 100x100 grid
 
-#dist = ((agents[0][0] - agents[1][0])**2 + (agents[0][1] - agents[1][1])**2)**0.5
-#print(dist)
+# dist = ((agents[0][0] - agents[1][0])**2 + (agents[0][1] - agents[1][1])**2)**0.5
+# print(dist)
 
 
 ## Graph Plotting
+
+# matplotlib.pyplot.ylim(0, 99)
+# matplotlib.pyplot.xlim(0, 99)
+# matplotlib.pyplot.scatter(agents[0][1],agents[0][0])
+# matplotlib.pyplot.scatter(agents[1][1],agents[1][0])
+# matplotlib.pyplot.show()
+
 
 matplotlib.pyplot.ylim(0, 99)
 matplotlib.pyplot.xlim(0, 99)
 for i in range(len(agents)):
     matplotlib.pyplot.scatter(agents[i][1],agents[i][0], color='GREY')
-#matplotlib.pyplot.scatter(agents[0][1],agents[0][0])
-#matplotlib.pyplot.scatter(agents[1][1],agents[1][0])
-#matplotlib.pyplot.scatter(agents[2][1],agents[2][0])
-#matplotlib.pyplot.scatter(agents[3][1],agents[3][0])
+# matplotlib.pyplot.scatter(agents[0][1],agents[0][0])
+# matplotlib.pyplot.scatter(agents[1][1],agents[1][0])
+# matplotlib.pyplot.scatter(agents[2][1],agents[2][0])
+# matplotlib.pyplot.scatter(agents[3][1],agents[3][0])
 
 bottom = min(agents, key=operator.itemgetter(0))
 print(bottom)
