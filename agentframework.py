@@ -5,7 +5,10 @@ Created on Sat Oct 22 11:27:22 2022
 @author: benja
 """
 
-import agentframework
+
+
+
+"""
 import random
 
 class Agent:

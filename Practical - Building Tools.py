@@ -8,6 +8,7 @@ Created on Thu Sep 29 14:11:24 2022
 import random
 import operator
 import matplotlib.pyplot
+import time
 
 def distance_between(agents_row_a, agents_row_b):
     # type()
@@ -47,5 +48,15 @@ matplotlib.pyplot.show()
 distance = distance_between(agents[0], agents[1])
 print(distance)
 
+
+# Distance between each pair of agents
+
+start = time.process_time()
+
 for i in range(num_of_agents):
-    distance_between(agents[i][0], agents[i][1])
+    distance_between(agents[i], agents[i-1])
+    # distance_between(agents[i][0], agents[i+1][0])
+    
+end = time.process_time()
+
+print("time = " + str(end - start))
