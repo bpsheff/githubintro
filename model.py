@@ -1,13 +1,16 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Oct 22 11:30:39 2022
-
-@author: benja
-"""
-
 import random
 import operator
 import matplotlib.pyplot
+import agentframework
+
+# Random seed setting (for reproducibility)
+random.seed(0)
+
+a = agentframework.Agent()
+print(a)
+print(a.y, a.x) #97 49
+a.move()
+print(a.y, a.x) #98 48
 
 def distance_between(agents_row_a, agents_row_b):
     return (((agents_row_a[0] - agents_row_b[0])**2) +
@@ -47,67 +50,67 @@ for agents_row_a in agents:
         distance = distance_between(agents_row_a, agents_row_b)
 
 
-"""
 
-import random
-import operator
-import matplotlib.pyplot
-import agentframework
-import csv
 
-a = agentframework.Agent()
+# import random
+# import operator
+# import matplotlib.pyplot
+# import agentframework
+# import csv
 
-#Random seed
-random.seed(0)
+# a = agentframework.Agent()
 
-#Creating environment
-environment = []
-with open('in.txt', newline='') as f:
-    dataset = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
-    for row in dataset:
-        rowlist = []
-        for value in row:
-            # print(value)
-            rowlist.append(value)
-        environment.append(rowlist)
+# #Random seed
+# random.seed(0)
 
-#Check data are properly read in
-matplotlib.pyplot.imshow(environment)
-matplotlib.pyplot.show()
+# #Creating environment
+# environment = []
+# with open('in.txt', newline='') as f:
+#     dataset = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
+#     for row in dataset:
+#         rowlist = []
+#         for value in row:
+#             # print(value)
+#             rowlist.append(value)
+#         environment.append(rowlist)
 
-a = agentframework.Agent(environment)
-print(type(a))
-# print(a.y, a.x)
+# #Check data are properly read in
+# matplotlib.pyplot.imshow(environment)
+# matplotlib.pyplot.show()
 
-# Test
-a.move()
-# print(a.y, a.x)
+# a = agentframework.Agent(environment)
+# print(type(a))
+# # print(a.y, a.x)
 
-def distance_between(a, b):
-    return (((a.x - b.x)**2) + ((a.y - b.y)**2))**0.5
+# # Test
+# a.move()
+# # print(a.y, a.x)
 
-num_of_agents = 10
-num_of_iterations = 100
-agents = []
+# def distance_between(a, b):
+#     return (((a.x - b.x)**2) + ((a.y - b.y)**2))**0.5
 
-# Make the agents.
-for i in range(num_of_agents):
-    agents.append(agentframework.Agent())
-for i in range(num_of_agents):
-    print(agents[i].x, agents[i].y)
+# num_of_agents = 10
+# num_of_iterations = 100
+# agents = []
 
-# Move the agents.
-for j in range(num_of_iterations):
-    for i in range(num_of_agents):
-        agents[i].move()
+# # Make the agents.
+# for i in range(num_of_agents):
+#     agents.append(agentframework.Agent())
+# for i in range(num_of_agents):
+#     print(agents[i].x, agents[i].y)
 
-#Scatter plot
-matplotlib.pyplot.xlim(0, 99)
-matplotlib.pyplot.ylim(0, 99)
-for i in range(num_of_agents):
-    matplotlib.pyplot.scatter(agents[i].x,agents[i].y)
-matplotlib.pyplot.show()
+# # Move the agents.
+# for j in range(num_of_iterations):
+#     for i in range(num_of_agents):
+#         agents[i].move()
 
-for agents_row_a in agents:
-    for agents_row_b in agents:
-        distance = distance_between(agents_row_a, agents_row_b)
+# #Scatter plot
+# matplotlib.pyplot.xlim(0, 99)
+# matplotlib.pyplot.ylim(0, 99)
+# for i in range(num_of_agents):
+#     matplotlib.pyplot.scatter(agents[i].x,agents[i].y)
+# matplotlib.pyplot.show()
+
+# for agents_row_a in agents:
+#     for agents_row_b in agents:
+#         distance = distance_between(agents_row_a, agents_row_b)
