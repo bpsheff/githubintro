@@ -1,8 +1,8 @@
 import random
 
-class Agent():                                                                  #brackets?
+class Agent():
     
-    def __init__(self, i, environment, agents, y = None, x = None):                                 #self needed? missing from notes
+    def __init__(self, i, environment, agents, y = None, x = None):            
         self.i = i
         self.environment = environment
         self.agents = agents
@@ -33,8 +33,9 @@ class Agent():                                                                  
             self.y = self.y + 1
         else:
             self.y = self.y - 1
-            
-    def eat(self):
+    
+    #Function allowing agents to erode, or 'eat' their environment        
+    def eat(self):                                                              
         if self.environment[self.y][self.x] > 10:
             self.environment[self.y][self.x] -= 10
             self.store += 10
@@ -49,8 +50,7 @@ class Agent():                                                                  
             distance = self.distance_between(self.agents[i])
             # If distance is less than or equal to the neighbourhood:
             if distance <= neighbourhood:
-                # Sum self.store and agent.store
-                # Divide sum by two to calculate average
+                # Average (half the sum of self.store and agent.store):
                 ave = (self.store + self.agents[i].store) / 2
                 self.store = ave
                 self.agents[i].store = ave
