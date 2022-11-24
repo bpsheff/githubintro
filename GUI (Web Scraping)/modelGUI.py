@@ -16,7 +16,7 @@ import requests
 import bs4
 
 r = requests.get('http://www.geog.leeds.ac.uk/courses/computing/practicals/python/agent-framework/part9/data.html', verify=False)
-content = r.text
+content = r.text    # string created from text file
 soup = bs4.BeautifulSoup(content, 'html.parser')
 td_ys = soup.find_all(attrs={"class" : "y"})
 td_xs = soup.find_all(attrs={"class" : "x"})
@@ -25,17 +25,17 @@ print(td_xs)
 
 
 #Creating the environment in which agents move around
-environment = []    # empty list
+environment = []    # making empty list
 with open('C:/Users/benja/test/githubintro/in.txt', newline='') as f:           # Renamed for efficiency
     dataset = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)
     for row in dataset:
-        rowlist = []    #creating empty list
+        rowlist = []    # making empty list
         for value in row:
             # print(value)
             rowlist.append(value)
         environment.append(rowlist)
 
-# # Check data are properly read in                                             # Uncomment to run check
+# # Check data are properly read in                    # Uncomment to run check
 # matplotlib.pyplot.imshow(environment)
 # matplotlib.pyplot.show()
 
