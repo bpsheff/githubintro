@@ -135,7 +135,7 @@ def update(frame_number):
     
 def gen_function(b = [0]):
     a = 0
-    global carry_on    #for clarity
+    global carry_on    #for clarity only
     while (a < 10) & (carry_on) :
         yield a		                    
         a = a + 1
