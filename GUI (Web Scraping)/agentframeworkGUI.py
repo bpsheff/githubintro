@@ -23,10 +23,10 @@ class Agent():
     def move(self):
         
         # Adjust x-coordinate
-        if random.randint(0, 1) == 0:
-            self.x = self.x + 1
+        if random.randint(0, 1) == 0: # random condition
+            self.x = self.x + 1     # adds 1 to x-coordinate if condition met
         else:
-            self.x = self.x - 1
+            self.x = self.x - 1     # subtracts 1 if condition met
         
         #Adjust y-coordinate
         if random.randint(0,1) == 0:
