@@ -1,24 +1,22 @@
 # IMPORTING MODULES
-# For working with CSV files
+# For working with CSV files:
 import csv
-# For plotting maps
+# For plotting maps:
 import matplotlib
-
+# For operating system commands:
 import os
+# For reading/writing multiple files:
+import fileinput
 
 
 '''
 I. Reading in the maps of population density and rat populations
 '''
-
-
-'''
-Initialising the environment
-'''
-print("II. Initialising the environment")
+print("I. Reading in the maps of population density and rat populations")
+print("PARISH DATA")
 
 # Creating empty environment:
-environment = []
+parish = []
 
 '''
 # Initialising the directory
@@ -47,17 +45,14 @@ popden.parish = os.path.join(inputdatadir, 'death.parishes.txt')
 '''
 
 # Read parish population density CSV into environment
-with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newline='') as f:  # 'r' command implied
-#with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newline='') as popden.parish:  # 'r' command implied
-
-# Maps in CSV format, so read in using csv.reader command:
-    reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)    
+with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newline='') as f_p:  # 'r' command implied
+    reader = csv.reader(f_p, quoting=csv.QUOTE_NONNUMERIC)    # Maps in CSV format, so read in using csv.reader command:
     for row in reader:
         rowlist = []
         for value in row:
             rowlist.append(value)
             #print(value)
-        environment.append(rowlist)
+        parish.append(rowlist)
 
 '''
 # Codecademy approach (reading each line separately):
@@ -79,14 +74,17 @@ with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newl
 '''
 
 # Display map        
-matplotlib.pyplot.imshow(environment)
+matplotlib.pyplot.imshow(parish)
 matplotlib.pyplot.show()
 
-# Read rats CSV into environment
-with open('C:/Users/benja/test/githubintro/Black Death/death.rats.txt', newline='') as f2:  # 'r' command implied
+print("RATS DATA")
+# Creating empty environment:
+catch_area = []
 
-# Maps in CSV format, so read in using csv.reader command:
-    reader = csv.reader(f2, quoting=csv.QUOTE_NONNUMERIC)    
+# Read rats CSV into environment
+with open('C:/Users/benja/test/githubintro/Black Death/death.rats.txt', newline='') as f_r:  # 'r' command implied
+    # Maps in CSV format, so read in using csv.reader command:
+    reader = csv.reader(f_r, quoting=csv.QUOTE_NONNUMERIC)    
     # For each row:
     for row in reader:
         # Create an empty list:
@@ -96,19 +94,41 @@ with open('C:/Users/benja/test/githubintro/Black Death/death.rats.txt', newline=
             # Append the value to the rowlist:
             rowlist.append(value)
             #print(value)
-        environment.append(rowlist)
+        catch_area.append(rowlist)
 
 # Display map        
-matplotlib.pyplot.imshow(environment)
+matplotlib.pyplot.imshow(catch_area)
 matplotlib.pyplot.show()
 
 
 '''
-II. Creating a map of deaths
+II. Initialising the environment: Creating a map of deaths
 '''
+print("II. Initialising the environment: Creating a map of deaths")
 
+# Creating empty environment:
+environment = []
 
-    
+'''
+with open('death.parishes.txt', 'w') as f_p, open('death.rats.txt', 'w') as f_r:
+    # Within the environment:
+    reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)   
+    # For each row:
+    for row in reader:
+        # Create an empty list:
+        rowlist = []
+        # For each value in the row:
+        for value in row:
+            # d = 1.04*p*r     # need to 
+            # Append the value to the rowlist:
+            rowlist.append(value)
+            #print(value)
+        environment.append(rowlist)
+'''        
+        
+for value in row:
+            # replace value with d - write function?
+        
 
 # Display map        
 matplotlib.pyplot.imshow(environment)
