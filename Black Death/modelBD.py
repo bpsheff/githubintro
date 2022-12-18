@@ -7,6 +7,8 @@ import matplotlib
 import os
 # For reading/writing multiple files:
 import fileinput
+# For mathematical operations:
+import numpy # as np    
 
 
 '''
@@ -109,6 +111,17 @@ print("II. Initialising the environment: Creating a map of deaths")
 # Creating empty environment:
 environment = []
 
+# Writing to empty file
+with open('deaths.csv', 'w', newline='') as f:  
+    # numpy.multiply()
+    writer = csv.writer(f, delimiter=' ')           # include delimiter command only if want to create space-delimited instead of csv
+    for row in data:         
+        writer.writerow(row)
+
+deaths.txt[0,0] = 1.04*death.parishes.txt[0,0]*death.rats.txt[0,0]
+deaths.txt[i,i] = 1.04*death.parishes.txt[i,i]*death.rats.txt[i,i]
+# file1[i,i] = 1.04*file2[i,i]*file3[i,i]
+
 '''
 with open('death.parishes.txt', 'w') as f_p, open('death.rats.txt', 'w') as f_r:
     # Within the environment:
@@ -119,7 +132,8 @@ with open('death.parishes.txt', 'w') as f_p, open('death.rats.txt', 'w') as f_r:
         rowlist = []
         # For each value in the row:
         for value in row:
-            # d = 1.04*p*r     # need to 
+            d = 1.04*p*r     # need to 
+            value = d
             # Append the value to the rowlist:
             rowlist.append(value)
             #print(value)
