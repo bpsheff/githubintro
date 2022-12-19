@@ -113,16 +113,24 @@ environment = []
 
 # Writing to empty file
 with open('deaths.csv', 'w', newline='') as f:  
-    # numpy.multiply()
+# Hadamard (element-wise) multiplication of parish and rats data using the numpy module
+    numpy.multiply(parish, catch_area)
+    print(numpy.multiply(parish, catch_area))
+# Test using equivalent method
+    print(parish * catch_area)  # TypeError: can't multiply sequence by non-int of type 'list'
+
+
+'''
     writer = csv.writer(f, delimiter=' ')           # include delimiter command only if want to create space-delimited instead of csv
     for row in data:         
         writer.writerow(row)
+
 
 deaths.txt[0,0] = 1.04*death.parishes.txt[0,0]*death.rats.txt[0,0]
 deaths.txt[i,i] = 1.04*death.parishes.txt[i,i]*death.rats.txt[i,i]
 # file1[i,i] = 1.04*file2[i,i]*file3[i,i]
 
-'''
+
 with open('death.parishes.txt', 'w') as f_p, open('death.rats.txt', 'w') as f_r:
     # Within the environment:
     reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)   
