@@ -55,7 +55,8 @@ with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newl
             rowlist.append(value)
             #print(value)
         parish.append(rowlist)
-
+# Check parish environment matches original dataset
+print(parish)
 '''
 # Codecademy approach (reading each line separately):
 # with open("death.parishes.txt") as popden.parish:
@@ -74,7 +75,6 @@ with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newl
 # print(pdp.data)
 # popden.parish.close()
 '''
-
 # Display map        
 matplotlib.pyplot.imshow(parish)
 matplotlib.pyplot.show()
@@ -97,7 +97,8 @@ with open('C:/Users/benja/test/githubintro/Black Death/death.rats.txt', newline=
             rowlist.append(value)
             #print(value)
         catch_area.append(rowlist)
-
+# Check rats environment matches original dataset
+print(catch_area)
 # Display map        
 matplotlib.pyplot.imshow(catch_area)
 matplotlib.pyplot.show()
@@ -116,11 +117,29 @@ with open('deaths.csv', 'w', newline='') as f:
 # Hadamard (element-wise) multiplication of parish and rats data using the numpy module
     numpy.multiply(parish, catch_area)
     print(numpy.multiply(parish, catch_area))
+    # Within the environment:
+    reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)   
+    # For each row:
+    for row in reader:
+        # Create an empty list:
+        rowlist = []
+        # For each value in the row:
+        for value in row:
+            d = 1.04*p*r     # need to 
+            value = d
+            # Append the value to the rowlist:
+            rowlist.append(value)
+            #print(value)
+        environment.append(rowlist)
+# Multiply new array by 1.04 to find the deaths
+    numpy.multiply(1.04 * environment)  # TypeError: can't multiply sequence by non-int of type 'float'
+
+'''
 # Test using equivalent method
     print(parish * catch_area)  # TypeError: can't multiply sequence by non-int of type 'list'
 
 
-'''
+
     writer = csv.writer(f, delimiter=' ')           # include delimiter command only if want to create space-delimited instead of csv
     for row in data:         
         writer.writerow(row)
@@ -146,12 +165,19 @@ with open('death.parishes.txt', 'w') as f_p, open('death.rats.txt', 'w') as f_r:
             rowlist.append(value)
             #print(value)
         environment.append(rowlist)
-'''        
+       
         
 for value in row:
             # replace value with d - write function?
         
+'''         
 
-# Display map        
+'''
+III. Displaying the map of deaths
+'''
+# Converting to CSV format
+
+
+# Displaying map of deaths
 matplotlib.pyplot.imshow(environment)
 matplotlib.pyplot.show()    
