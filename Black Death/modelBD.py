@@ -112,11 +112,46 @@ print("II. Initialising the environment: Creating a map of deaths")
 # Creating empty environment:
 environment = []
 
+# List of lists method
+
+nrows = 
+ncols = 
+
+for row in nrows:
+
+for col in ncols:
+
+environment.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
+
+result.append(environment)
+
+
+
 # Writing to empty file
 with open('deaths.csv', 'w', newline='') as f:  
 # Hadamard (element-wise) multiplication of parish and rats data using the numpy module
     numpy.multiply(parish, catch_area)
     print(numpy.multiply(parish, catch_area))
+    1.04 * numpy.array(environment)
+    print(1.04 * numpy.array(environment))
+    # Testing
+    5.01 * numpy.array(environment)
+    print(5.01 * numpy.array(environment))
+'''    
+# Creating scalar variable for deaths calculations
+    scalar = 1.04
+# Multiplying by 1.04 as in deaths formula
+    numpy.multiply(scalar, environment)
+# Printing result
+    print(numpy.multiply(scalar, environment))
+# Testing calculation method
+    scalar2 = 2.0
+    numpy.multiply(scalar2, environment)
+    print(numpy.multiply(scalar2, environment))
+    scalar3 = 3
+    numpy.multiply(scalar3, environment)
+    print(numpy.multiply(scalar3, environment))
+'''
     # Within the environment:
     reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)   
     # For each row:
@@ -125,16 +160,18 @@ with open('deaths.csv', 'w', newline='') as f:
         rowlist = []
         # For each value in the row:
         for value in row:
-            d = 1.04*p*r     # need to 
+            '''
+            d = 1.04*p*r     # need to             
             value = d
+            '''
             # Append the value to the rowlist:
             rowlist.append(value)
             #print(value)
         environment.append(rowlist)
 # Multiply new array by 1.04 to find the deaths
+'''
     numpy.multiply(1.04 * environment)  # TypeError: can't multiply sequence by non-int of type 'float'
 
-'''
 # Test using equivalent method
     print(parish * catch_area)  # TypeError: can't multiply sequence by non-int of type 'list'
 
