@@ -112,21 +112,61 @@ print("II. Initialising the environment: Creating a map of deaths")
 # Creating empty environment:
 environment = []
 
-# List of lists method
-
-nrows = 
-ncols = 
+'''
+List of lists method
+'''
+# Checking number of rows and columns in each dataset is equal to 400 (as specified in instructions)
+print("Rows in parish list = " + str(len(parish))) # 400
+print("Rows in  rat catch area list = " + str(len(catch_area))) # 400
+print("Columns in parish list = " + str(len(parish[0]))) # 400
+print("Columns in rat catch area list = " + str(len(catch_area[0]))) # 400
+# Setting number of rows and columns in new (composite) environment dataset equal to parish (chosen arbitrarily)
+nrows = len(parish) 
+ncols = len(parish)
 
 for row in nrows:
 
 for col in ncols:
 
-environment.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
+rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
 
-result.append(environment)
+environment.append(rowlist)
+
+'''
+# Testing
+
+# Using len(rats) instead of len(parish)
+
+nrows = len(catch_area) 
+ncols = len(catch_area)
+
+for row in nrows:
+
+for col in ncols:
+
+rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
+
+environment.append(rowlist)
 
 
+# Setting row and column lengths manually
 
+nrows = 400 
+ncols = 400
+
+for row in nrows:
+
+for col in ncols:
+
+rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
+
+environment.append(rowlist)
+'''
+
+
+'''
+NumPy method
+'''
 # Writing to empty file
 with open('deaths.csv', 'w', newline='') as f:  
 # Hadamard (element-wise) multiplication of parish and rats data using the numpy module
