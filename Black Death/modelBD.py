@@ -48,7 +48,7 @@ popden.parish = os.path.join(inputdatadir, 'death.parishes.txt')
 
 # Read parish population density CSV into environment
 with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newline='') as f_p:  # 'r' command implied
-    reader = csv.reader(f_p, quoting=csv.QUOTE_NONNUMERIC)    # Maps in CSV format, so read in using csv.reader command:
+    reader = csv.reader(f_p, quoting=csv.QUOTE_NONNUMERIC)    # Maps in CSV format, so read in using csv.reader command
     for row in reader:
         rowlist = []
         for value in row:
@@ -122,18 +122,27 @@ print("Columns in parish list = " + str(len(parish[0]))) # 400
 print("Columns in rat catch area list = " + str(len(catch_area[0]))) # 400
 # Setting number of rows and columns in new (composite) environment dataset equal to parish (chosen arbitrarily)
 nrows = len(parish) 
+print(nrows)
 ncols = len(parish)
+print(ncols)
 
-for row in nrows:
-
-for col in ncols:
-
-rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
-
+for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
+    for col in range(ncols):
+        rowlist.append(1.04 * parish[row][col] * catch_area[row][col])
 environment.append(rowlist)
+print(environment)
 
 '''
 # Testing
+
+# Using a larger float value to check multiplication works:
+for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
+    for col in range(ncols):
+        rowlist.append(5.04 * parish[row][col] * catch_area[row][col])
+environment.append(rowlist)
+print(environment)   # values all seem to be larger by a factor of ~5, as expected
+
+
 
 # Using len(rats) instead of len(parish)
 
