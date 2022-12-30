@@ -171,10 +171,19 @@ rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
 
 environment.append(rowlist)
 '''
+'''
+III. Displaying the map of deaths
+'''
+# Converting to CSV format
+type(environment)
 
+# Displaying map of deaths
+matplotlib.pyplot.imshow(environment)   # need to save as csv file first?
+matplotlib.pyplot.show()
 
 '''
 NumPy method
+'''
 '''
 # Writing to empty file
 with open('deaths.csv', 'w', newline='') as f:  
@@ -186,6 +195,8 @@ with open('deaths.csv', 'w', newline='') as f:
     # Testing
     5.01 * numpy.array(environment)
     print(5.01 * numpy.array(environment))
+'''    
+    
 '''    
 # Creating scalar variable for deaths calculations
     scalar = 1.04
@@ -201,6 +212,8 @@ with open('deaths.csv', 'w', newline='') as f:
     numpy.multiply(scalar3, environment)
     print(numpy.multiply(scalar3, environment))
 '''
+
+'''
     # Within the environment:
     reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)   
     # For each row:
@@ -209,15 +222,17 @@ with open('deaths.csv', 'w', newline='') as f:
         rowlist = []
         # For each value in the row:
         for value in row:
-            '''
+            
             d = 1.04*p*r     # need to             
             value = d
-            '''
+            
             # Append the value to the rowlist:
             rowlist.append(value)
             #print(value)
         environment.append(rowlist)
 # Multiply new array by 1.04 to find the deaths
+'''
+
 '''
     numpy.multiply(1.04 * environment)  # TypeError: can't multiply sequence by non-int of type 'float'
 
@@ -258,12 +273,3 @@ for value in row:
         
 '''         
 
-'''
-III. Displaying the map of deaths
-'''
-# Converting to CSV format
-
-
-# Displaying map of deaths
-matplotlib.pyplot.imshow(environment)
-matplotlib.pyplot.show()    
