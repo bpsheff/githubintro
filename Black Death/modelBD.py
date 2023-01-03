@@ -126,10 +126,17 @@ print(nrows)
 ncols = len(parish)
 print(ncols)
 
-for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
+# For each row:
+for row in range(nrows):
+    # Create an empty list:
+    rowlist = []
+    # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
+        # Append value to rowlist:
         rowlist.append(1.04 * parish[row][col] * catch_area[row][col])
-environment.append(rowlist)
+    # 
+    environment.append(rowlist)
+# 
 print(environment)
 
 '''
