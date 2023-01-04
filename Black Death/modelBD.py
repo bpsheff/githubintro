@@ -105,7 +105,7 @@ matplotlib.pyplot.show()
 
 
 '''
-II. Initialising the environment: Creating a map of deaths
+II. Initialising the environment: Creating a map of deaths in week 1
 '''
 print("II. Initialising the environment: Creating a map of deaths")
 
@@ -178,9 +178,7 @@ rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
 
 environment.append(rowlist)
 '''
-'''
-III. Displaying the map of deaths
-'''
+
 # Converting to CSV format
 type(environment)
 
@@ -280,3 +278,98 @@ for value in row:
         
 '''         
 
+'''
+III. Creating maps for subsequent weeks
+'''
+print('Creating maps for subsequent weeks')
+
+# Now we have the number of deaths in each area, we can subtract these from initial parish population to find the updated population at the beginning of week 2
+
+# Creating dataset for population at the beginning of week 2
+pop2 = []
+
+# Setting number of rows and columns in new (composite) environment dataset equal to parish (chosen arbitrarily)
+nrows = len(parish) 
+print(nrows)
+ncols = len(parish)
+print(ncols)
+
+# For each row:
+for row in range(nrows):
+    # Create an empty list:
+    rowlist = []
+    # For each value in the row:     # 'column' not 'value'?
+    for col in range(ncols):
+        # Append value to rowlist:
+        rowlist.append(parish[row][col] - environment[row][col])
+    # 
+    pop2.append(rowlist)
+# 
+print(pop2)
+
+'''
+# Testing
+
+# Using a larger float value to check multiplication works:
+for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
+    for col in range(ncols):
+        rowlist.append(5.04 * parish[row][col] * catch_area[row][col])
+environment.append(rowlist)
+print(environment)   # values all seem to be larger by a factor of ~5, as expected
+
+
+
+# Using len(rats) instead of len(parish)
+
+nrows = len(catch_area) 
+ncols = len(catch_area)
+
+for row in nrows:
+
+for col in ncols:
+
+rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
+
+environment.append(rowlist)
+
+
+# Setting row and column lengths manually
+
+nrows = 400 
+ncols = 400
+
+for row in nrows:
+
+for col in ncols:
+
+rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
+
+environment.append(rowlist)
+'''
+
+type(pop2)
+
+# Displaying map of parish population at the beginning of week 2
+matplotlib.pyplot.imshow(pop2)
+matplotlib.pyplot.show()
+
+# From here we can create a map of deaths for week 2, using the same formula as before, assuming number of rats in each area doesn't change
+# Creating the environment for week 2
+environment2 = []
+
+# For each row:
+for row in range(nrows):
+    # Create an empty list:
+    rowlist = []
+    # For each value in the row:     # 'column' not 'value'?
+    for col in range(ncols):
+        # Append value to rowlist:
+        rowlist.append(1.04 * pop2[row][col] * catch_area[row][col])
+    # 
+    environment2.append(rowlist)
+# 
+print(environment2)
+
+# Displaying map of deaths
+matplotlib.pyplot.imshow(environment2)
+matplotlib.pyplot.show()
