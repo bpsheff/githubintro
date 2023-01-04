@@ -46,17 +46,33 @@ file = os.path.join(inputdatadir, 'in.txt')
 popden.parish = os.path.join(inputdatadir, 'death.parishes.txt')
 '''
 
-# Read parish population density CSV into environment
-with open('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt', newline='') as f_p:  # 'r' command implied
-    reader = csv.reader(f_p, quoting=csv.QUOTE_NONNUMERIC)    # Maps in CSV format, so read in using csv.reader command
-    for row in reader:
-        rowlist = []
-        for value in row:
-            rowlist.append(value)
-            #print(value)
-        parish.append(rowlist)
+def read_data(filename):
+    result = []
+    with open(filename, newline='') as f_p:  # 'r' command implied
+        reader = csv.reader(f_p, quoting=csv.QUOTE_NONNUMERIC)    # Maps in CSV format, so read in using csv.reader command
+        for row in reader:
+            rowlist = []
+            for value in row:
+                rowlist.append(value)
+                #print(value)
+            result.append(rowlist)
+    return result
+
+parish = read_data('death.parishes.txt')
+catch_area = read_data('death.rats.txt')
+
+
+# # Read parish population density CSV into environment
+# with open('death.parishes.txt', newline='') as f_p:  # 'r' command implied
+#     reader = csv.reader(f_p, quoting=csv.QUOTE_NONNUMERIC)    # Maps in CSV format, so read in using csv.reader command
+#     for row in reader:
+#         rowlist = []
+#         for value in row:
+#             rowlist.append(value)
+#             #print(value)
+#         parish.append(rowlist)
 # Check parish environment matches original dataset
-print(parish)
+#print(parish)
 '''
 # Codecademy approach (reading each line separately):
 # with open("death.parishes.txt") as popden.parish:
@@ -79,26 +95,26 @@ print(parish)
 matplotlib.pyplot.imshow(parish)
 matplotlib.pyplot.show()
 
-print("RATS DATA")
-# Creating empty environment:
-catch_area = []
+# print("RATS DATA")
+# # Creating empty environment:
+# catch_area = []
 
-# Read rats CSV into environment
-with open('C:/Users/benja/test/githubintro/Black Death/death.rats.txt', newline='') as f_r:  # 'r' command implied
-    # Maps in CSV format, so read in using csv.reader command:
-    reader = csv.reader(f_r, quoting=csv.QUOTE_NONNUMERIC)    
-    # For each row:
-    for row in reader:
-        # Create an empty list:
-        rowlist = []
-        # For each value in the row:
-        for value in row:
-            # Append the value to the rowlist:
-            rowlist.append(value)
-            #print(value)
-        catch_area.append(rowlist)
+# # Read rats CSV into environment
+# with open('death.rats.txt', newline='') as f_r:  # 'r' command implied
+#     # Maps in CSV format, so read in using csv.reader command:
+#     reader = csv.reader(f_r, quoting=csv.QUOTE_NONNUMERIC)    
+#     # For each row:
+#     for row in reader:
+#         # Create an empty list:
+#         rowlist = []
+#         # For each value in the row:
+#         for value in row:
+#             # Append the value to the rowlist:
+#             rowlist.append(value)
+#             #print(value)
+#         catch_area.append(rowlist)
 # Check rats environment matches original dataset
-print(catch_area)
+#print(catch_area)
 # Display map        
 matplotlib.pyplot.imshow(catch_area)
 matplotlib.pyplot.show()
@@ -126,6 +142,17 @@ print(nrows)
 ncols = len(parish)
 print(ncols)
 
+def calculate_death(pop, rats):
+    d = rats ** 0.8
+    if d == 0:
+        # 50% death
+        death = pop / 2
+    else:
+        death = pop ** 1.3 / d
+    return death
+    
+    
+    
 # For each row:
 for row in range(nrows):
     # Create an empty list:
@@ -133,11 +160,20 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(1.04 * parish[row][col] * catch_area[row][col])
+        
+        # d = catch_area[row][col] ** 0.8
+        # if d == 0:
+        #     # 50% death
+        #     death = parish[row][col] / 2
+        # else:
+        #     death = parish[row][col] ** 1.3 / d
+        # rowlist.append(death)
+        
+        rowlist.append(calculate_death(parish[row][col], catch_area[row][col]))
     # 
     environment.append(rowlist)
 # 
-print(environment)
+#print(environment)
 
 '''
 # Testing
@@ -293,7 +329,7 @@ nrows = len(parish)
 print(nrows)
 ncols = len(parish)
 print(ncols)
-
+count = 0
 # For each row:
 for row in range(nrows):
     # Create an empty list:
@@ -301,11 +337,18 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(parish[row][col] - environment[row][col])
+        pop = parish[row][col] - environment[row][col]
+        if pop > 0:
+            rowlist.append(int(pop))
+            count = count + 1
+        else:
+            rowlist.append(0)
     # 
     pop2.append(rowlist)
 # 
-print(pop2)
+print(count)
+#print(pop2)
+
 
 '''
 # Testing
@@ -364,11 +407,12 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(1.3 * pop2[row][col] / 0.8 * catch_area[row][col])
+        rowlist.append(calculate_death(pop2[row][col], catch_area[row][col]))
+        #rowlist.append(1.04 * pop2[row][col] * catch_area[row][col])
     # 
     environment2.append(rowlist)
 # 
-print(environment2)
+#print(environment2)
 
 # Displaying map of deaths
 matplotlib.pyplot.imshow(environment2)
@@ -395,11 +439,11 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(parish[row][col] - environment[row][col])
+        rowlist.append(pop2[row][col] - environment2[row][col])
     # 
     pop3.append(rowlist)
 # 
-print(pop3)
+#print(pop3)
 
 '''
 # Testing
@@ -458,11 +502,12 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(1.04 * pop3[row][col] * catch_area[row][col])
+        rowlist.append(calculate_death(pop3[row][col], catch_area[row][col]))
+        #rowlist.append(1.04 * pop3[row][col] * catch_area[row][col])
     # 
     environment3.append(rowlist)
 # 
-print(environment3)
+#print(environment3)
 
 # Displaying map of deaths
 matplotlib.pyplot.imshow(environment3)
@@ -489,11 +534,11 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(parish[row][col] - environment[row][col])
+        rowlist.append(pop3[row][col] - environment3[row][col])
     # 
     pop4.append(rowlist)
 # 
-print(pop4)
+#print(pop4)
 
 '''
 # Testing
@@ -534,7 +579,7 @@ rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
 
 environment.append(rowlist)
 '''
-
+"""
 type(pop4)
 
 # Displaying map of parish population at the beginning of week 4
@@ -552,6 +597,7 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
+        pop3
         rowlist.append(1.04 * pop4[row][col] * catch_area[row][col])
     # 
     environment4.append(rowlist)
@@ -561,3 +607,4 @@ print(environment4)
 # Displaying map of deaths
 matplotlib.pyplot.imshow(environment4)
 matplotlib.pyplot.show()
+"""
