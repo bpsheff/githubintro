@@ -15,13 +15,14 @@ import numpy # as np
 
 
 '''
-I. Reading in the maps of population density and rat populations
+I. Reading in maps of population density and rat populations
 '''
 print("I. Reading in the maps of population density and rat populations")
 print("PARISH DATA")
 
-# Creating empty environment:
-parish = []
+# Creating empty lists to store initial population, and rats caught, in each area:
+pop1 = []
+rats_caught = []
 
 '''
 # Initialising the directory
@@ -48,7 +49,7 @@ file = os.path.join(inputdatadir, 'in.txt')
 # Open file and read.
 popden.parish = os.path.join(inputdatadir, 'death.parishes.txt')
 '''
-
+# Creating a function to read in each dataset
 def read_data(filename):
     result = []
     with open(filename, newline='') as f_p:  # 'r' command implied
@@ -61,8 +62,8 @@ def read_data(filename):
             result.append(rowlist)
     return result
 
-parish = read_data('death.parishes.txt')
-catch_area = read_data('death.rats.txt')
+pop1 = read_data('death.parishes.txt')
+rats_caught = read_data('death.rats.txt')
 ''' 
 (Implicit in read_data function)
 # # Read parish population density CSV into environment
@@ -73,9 +74,9 @@ catch_area = read_data('death.rats.txt')
 #         for value in row:
 #             rowlist.append(value)
 #             #print(value)
-#         parish.append(rowlist)
+#         pop1.append(rowlist)
 # Check parish environment matches original dataset
-#print(parish)
+#print(pop1)
 '''
 '''
 # Codecademy approach (reading each line separately):
@@ -96,13 +97,13 @@ catch_area = read_data('death.rats.txt')
 # popden.parish.close()
 '''
 # Display map        
-matplotlib.pyplot.imshow(parish)
+matplotlib.pyplot.imshow(pop1)
 matplotlib.pyplot.show()
 ''' 
 (Implicit in read_data function)
 # print("RATS DATA")
 # # Creating empty environment:
-# catch_area = []
+# rats_caught = []
 
 # # Read rats CSV into environment
 # with open('death.rats.txt', newline='') as f_r:  # 'r' command implied
@@ -117,12 +118,12 @@ matplotlib.pyplot.show()
 #             # Append the value to the rowlist:
 #             rowlist.append(value)
 #             #print(value)
-#         catch_area.append(rowlist)
+#         rats_caught.append(rowlist)
 # Check rats environment matches original dataset
-#print(catch_area)
+#print(rats_caught)
 # Display map        
 '''
-matplotlib.pyplot.imshow(catch_area)
+matplotlib.pyplot.imshow(rats_caught)
 matplotlib.pyplot.show()
 
 
@@ -132,27 +133,31 @@ II. Initialising the environment: Creating a map of week 1 deaths
 print("II. Initialising the environment: Creating a map of deaths")
 
 # Creating empty environment:
-death_map = []
+deaths = []
 
 # Checking number of rows and columns in each dataset is equal to 400 (as specified in instructions)
-print("Rows in parish list = " + str(len(parish))) # 400
-print("Rows in  rat catch area list = " + str(len(catch_area))) # 400
-print("Columns in parish list = " + str(len(parish[0]))) # 400
-print("Columns in rat catch area list = " + str(len(catch_area[0]))) # 400
+print("Rows in parish list = " + str(len(pop1))) # 400
+print("Rows in  rat catch area list = " + str(len(rats_caught))) # 400
+print("Columns in parish list = " + str(len(pop1[0]))) # 400
+print("Columns in rat catch area list = " + str(len(rats_caught[0]))) # 400
 # Setting number of rows and columns in new (composite) environment dataset equal to parish (chosen arbitrarily)
-nrows = len(parish) 
+nrows = len(pop1) 
+# Checking number of rows is as expected
 print(nrows)
-ncols = len(parish)
+# Checking number of columns is as expected
+ncols = len(pop1)
 print(ncols)
 
-# Embedding the deaths formula in a new function using the list of lists method:
+# Embedding the deaths formula inside a new function using the list of lists method:
 def death_calc(pop, rats):
-    d = rats ** 0.8
+    # Creating variable for denominator in deaths formula:
+    denom = rats ** 0.8
     # Assuming 50% death rate when no rats caught:
-    if d == 0:
+    if denom == 0:
         deaths = pop / 2
+    # Calculating per area deaths using population (when positive) and rats caught:
     else:
-        deaths = pop ** 1.3 / d
+        deaths = pop ** 1.3 / denom
     return deaths    
     
 # For each row:
@@ -162,20 +167,21 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        
-        # d = catch_area[row][col] ** 0.8
+        rowlist.append(death_calc(pop1[row][col], rats_caught[row][col]))
+    # 
+    deaths.append(rowlist)
+'''        
+        # d = rats_caught[row][col] ** 0.8
         # if d == 0:
         #     # 50% death
         #     deaths = parish[row][col] / 2
         # else:
         #     deaths = parish[row][col] ** 1.3 / d
         # rowlist.append(deaths)
-        
-        rowlist.append(death_calc(parish[row][col], catch_area[row][col]))
-    # 
-    death_map.append(rowlist)
-# 
-#print(death_map)
+'''        
+# Checking death map data looks as expected
+type(deaths)
+#print(deaths)
 
 '''
 # Testing
@@ -184,8 +190,8 @@ for row in range(nrows):
 for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
     for col in range(ncols):
         rowlist.append(5.04 * parish[row][col] * catch_area[row][col])
-death_map.append(rowlist)
-print(death_map)   # values all seem to be larger by a factor of ~5, as expected
+deaths.append(rowlist)
+print(deaths)   # values all seem to be larger by a factor of ~5, as expected
 
 
 
@@ -200,7 +206,7 @@ for col in ncols:
 
 rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
 
-death_map.append(rowlist)
+deaths.append(rowlist)
 
 
 # Setting row and column lengths manually
@@ -216,12 +222,8 @@ rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
 
 environment.append(rowlist)
 '''
-
-# Converting to CSV format
-type(death_map)
-
 # Displaying map of deaths
-matplotlib.pyplot.imshow(death_map)   # need to save as csv file first?
+matplotlib.pyplot.imshow(deaths)
 matplotlib.pyplot.show()
 
 '''
@@ -319,30 +321,46 @@ for value in row:
 '''
 III. Creating maps for subsequent weeks
 '''
-print('Creating maps for subsequent weeks')
+print('III. Creating maps for subsequent weeks')
 
-# Now we have the number of deaths in each area, we can subtract these from initial parish population to find the updated population at the beginning of week 2
+# Now we have the number of deaths in each area, we can subtract these from initial parish population to find the updated population at the beginning of week 2.
 
-# Creating dataset for population at the beginning of week 2
+# Creating dataset for population at beginning of week 2:
 pop2 = []
 
-# Setting number of rows and columns in new (composite) environment dataset equal to parish (chosen arbitrarily)
-nrows = len(parish) 
+# Setting number of rows and columns in new (composite) environment dataset equal to parish (chosen arbitrarily as before):
+nrows = len(pop2) 
 print(nrows)
-ncols = len(parish)
+ncols = len(pop2)
 print(ncols)
+
+# Setting up a count of areas still populated after initial wave of deaths (continued within if-else conditional):
 count = 0
+
+def survivors(pop_prev, rats):
+    # Calculating population after week 1 deaths:
+    pop = pop_prev - deaths
+'''
+    # # Setting up conditional to distinguish/pick out
+    # if pop > 0:
+    #     rowlist.append(int(pop))
+    #     count = count + 1
+    # # Ensuring remaining parish populations cannot be negative:
+    # else:
+    #     rowlist.append(0)
+'''
+    
 # For each row:
 for row in range(nrows):
-    # Create an empty list:
+    # Create empty list:
     rowlist = []
-    # For each value in the row:     # 'column' not 'value'?
+    # For each value in row:     # 'column' not 'value'?
     for col in range(ncols):
-        # Append value to rowlist:
-        pop = parish[row][col] - death_map[row][col]
-        if pop > 0:
-            rowlist.append(int(pop))
+        # Setting up conditional to distinguish/pick out
+        if pop2 > 0:
+            rowlist.append(int(survivors(pop1[row][col], deaths[row][col])))
             count = count + 1
+        # Ensuring remaining parish populations cannot be negative:
         else:
             rowlist.append(0)
     # 
@@ -351,6 +369,31 @@ for row in range(nrows):
 print(count)
 #print(pop2)
 
+'''
+        # # Calculating population after week 1 deaths:
+        # pop2 = pop1[row][col] - deaths[row][col]
+'''
+
+'''
+# For each row:
+for row in range(nrows):
+    # Create empty list:
+    rowlist = []
+    # For each value in row:     # 'column' not 'value'?
+    for col in range(ncols):
+        # Calculating population after week 1 deaths:
+        pop2 = pop1[row][col] - deaths[row][col]
+        # Setting up conditional to distinguish/pick out
+        if pop2 > 0:
+            rowlist.append(int(pop2))
+            count = count + 1
+        # Ensuring remaining parish populations cannot be negative:
+        else:
+            rowlist.append(0)
+    # 
+    pop2.append(rowlist)
+
+'''
 
 '''
 # Testing
@@ -400,7 +443,7 @@ matplotlib.pyplot.show()
 
 # From here we can create a map of deaths for week 2, using the same formula as before, assuming number of rats in each area doesn't change
 # Creating the environment for week 2
-death_map2 = []
+deaths2 = []
 
 # For each row:
 for row in range(nrows):
@@ -409,15 +452,15 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(death_calc(pop2[row][col], catch_area[row][col]))
-        #rowlist.append(1.04 * pop2[row][col] * catch_area[row][col])
+        rowlist.append(death_calc(pop2[row][col], rats_caught[row][col]))
+        #rowlist.append(1.04 * pop2[row][col] * rats_caught[row][col])
     # 
-    death_map2.append(rowlist)
+    deaths2.append(rowlist)
 # 
-#print(death_map2)
+#print(deaths2)
 
 # Displaying map of deaths
-matplotlib.pyplot.imshow(death_map2)
+matplotlib.pyplot.imshow(deaths2)
 matplotlib.pyplot.show()
 
 '''
@@ -428,10 +471,10 @@ print('Repeating for week 3')
 # Creating dataset for population at the beginning of week 3
 pop3 = []
 
-# Setting number of rows and columns in new (composite) death_map dataset equal to parish (chosen arbitrarily)
-nrows = len(parish) 
+# Setting number of rows and columns in new (composite) deaths dataset equal to parish (chosen arbitrarily)
+nrows = len(pop1) 
 print(nrows)
-ncols = len(parish)
+ncols = len(pop1)
 print(ncols)
 
 # For each row:
@@ -441,7 +484,7 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(pop2[row][col] - death_map2[row][col])
+        rowlist.append(pop2[row][col] - deaths2[row][col])
     # 
     pop3.append(rowlist)
 # 
@@ -495,7 +538,7 @@ matplotlib.pyplot.show()
 
 # From here we can create a map of deaths for week 3, using the same formula as before, assuming number of rats in each area doesn't change
 # Creating the environment for week 3
-death_map3 = []
+deaths3 = []
 
 # For each row:
 for row in range(nrows):
@@ -504,15 +547,15 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(death_calc(pop3[row][col], catch_area[row][col]))
-        #rowlist.append(1.04 * pop3[row][col] * catch_area[row][col])
+        rowlist.append(death_calc(pop3[row][col], rats_caught[row][col]))
+        #rowlist.append(1.04 * pop3[row][col] * rats_caught[row][col])
     # 
-    death_map3.append(rowlist)
+    deaths3.append(rowlist)
 # 
-#print(death_map3)
+#print(deaths3)
 
 # Displaying map of deaths
-matplotlib.pyplot.imshow(death_map3)
+matplotlib.pyplot.imshow(deaths3)
 matplotlib.pyplot.show()
 
 '''
@@ -524,9 +567,9 @@ print('Repeating for week 4')
 pop4 = []
 
 # Setting number of rows and columns in new (composite) environment dataset equal to parish (chosen arbitrarily)
-nrows = len(parish) 
+nrows = len(pop1) 
 print(nrows)
-ncols = len(parish)
+ncols = len(pop1)
 print(ncols)
 
 # For each row:
@@ -536,7 +579,7 @@ for row in range(nrows):
     # For each value in the row:     # 'column' not 'value'?
     for col in range(ncols):
         # Append value to rowlist:
-        rowlist.append(pop3[row][col] - death_map3[row][col])
+        rowlist.append(pop3[row][col] - deaths3[row][col])
     # 
     pop4.append(rowlist)
 # 
