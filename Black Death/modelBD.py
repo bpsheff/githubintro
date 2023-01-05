@@ -134,9 +134,6 @@ print("II. Initialising the environment: Creating a map of deaths")
 # Creating empty environment:
 death_map = []
 
-'''
-List of lists method
-'''
 # Checking number of rows and columns in each dataset is equal to 400 (as specified in instructions)
 print("Rows in parish list = " + str(len(parish))) # 400
 print("Rows in  rat catch area list = " + str(len(catch_area))) # 400
@@ -148,16 +145,15 @@ print(nrows)
 ncols = len(parish)
 print(ncols)
 
+# Embedding the deaths formula in a new function using the list of lists method:
 def death_calc(pop, rats):
     d = rats ** 0.8
+    # Assuming 50% death rate when no rats caught:
     if d == 0:
-        # 50% death
-        death = pop / 2
+        deaths = pop / 2
     else:
-        death = pop ** 1.3 / d
-    return death
-    
-    
+        deaths = pop ** 1.3 / d
+    return deaths    
     
 # For each row:
 for row in range(nrows):
@@ -170,10 +166,10 @@ for row in range(nrows):
         # d = catch_area[row][col] ** 0.8
         # if d == 0:
         #     # 50% death
-        #     death = parish[row][col] / 2
+        #     deaths = parish[row][col] / 2
         # else:
-        #     death = parish[row][col] ** 1.3 / d
-        # rowlist.append(death)
+        #     deaths = parish[row][col] ** 1.3 / d
+        # rowlist.append(deaths)
         
         rowlist.append(death_calc(parish[row][col], catch_area[row][col]))
     # 
