@@ -367,6 +367,8 @@ for row in range(nrows):
     pop2.append(rowlist)
 # 
 print(count)
+
+# 
 #print(pop2)
 
 '''
@@ -434,9 +436,6 @@ rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
 
 environment.append(rowlist)
 '''
-
-type(pop2)
-
 # Displaying map of parish population at the beginning of week 2
 matplotlib.pyplot.imshow(pop2)
 matplotlib.pyplot.show()
@@ -477,6 +476,28 @@ print(nrows)
 ncols = len(pop1)
 print(ncols)
 
+# Setting up a count of areas still populated after initial wave of deaths (continued within if-else conditional):
+count = 0
+
+# For each row:
+for row in range(nrows):
+    # Create empty list:
+    rowlist = []
+    # For each value in row:     # 'column' not 'value'?
+    for col in range(ncols):
+        # Setting up conditional to distinguish/pick out
+        if pop3 > 0:
+            rowlist.append(int(survivors(pop2[row][col], deaths[row][col])))
+            count = count + 1
+        # Ensuring remaining parish populations cannot be negative:
+        else:
+            rowlist.append(0)
+    # 
+    pop3.append(rowlist)
+# 
+print(count)
+
+'''
 # For each row:
 for row in range(nrows):
     # Create an empty list:
@@ -487,9 +508,7 @@ for row in range(nrows):
         rowlist.append(pop2[row][col] - deaths2[row][col])
     # 
     pop3.append(rowlist)
-# 
-#print(pop3)
-
+'''
 '''
 # Testing
 
@@ -572,18 +591,26 @@ print(nrows)
 ncols = len(pop1)
 print(ncols)
 
+# Setting up a count of areas still populated after initial wave of deaths (continued within if-else conditional):
+count = 0
+
 # For each row:
 for row in range(nrows):
-    # Create an empty list:
+    # Create empty list:
     rowlist = []
-    # For each value in the row:     # 'column' not 'value'?
+    # For each value in row:     # 'column' not 'value'?
     for col in range(ncols):
-        # Append value to rowlist:
-        rowlist.append(pop3[row][col] - deaths3[row][col])
+        # Setting up conditional to distinguish/pick out
+        if pop4 > 0:
+            rowlist.append(int(survivors(pop3[row][col], deaths[row][col])))
+            count = count + 1
+        # Ensuring remaining parish populations cannot be negative:
+        else:
+            rowlist.append(0)
     # 
     pop4.append(rowlist)
 # 
-#print(pop4)
+print(count)
 
 '''
 # Testing
