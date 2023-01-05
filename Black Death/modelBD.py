@@ -134,6 +134,8 @@ print("II. Initialising the environment: Creating a map of deaths")
 
 # Creating empty environment:
 deaths = []
+# Writing as CSV file
+writer = csv.writer(deaths)
 
 # Checking number of rows and columns in each dataset is equal to 400 (as specified in instructions)
 print("Rows in parish list = " + str(len(pop1))) # 400
