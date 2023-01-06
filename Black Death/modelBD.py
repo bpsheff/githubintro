@@ -62,8 +62,8 @@ def read_data(filename):
             result.append(rowlist)
     return result
 
-pop1 = read_data('death.parishes.txt')
-rats_caught = read_data('death.rats.txt')
+pop1 = read_data('C:/Users/benja/test/githubintro/Black Death/death.parishes.txt')
+rats_caught = read_data('C:/Users/benja/test/githubintro/Black Death/death.rats.txt')
 ''' 
 (Implicit in read_data function)
 # # Read parish population density CSV into environment
@@ -135,7 +135,8 @@ print("II. Initialising the environment: Creating a map of deaths")
 # Creating empty environment:
 deaths = []
 # Writing as CSV file
-writer = csv.writer(deaths)
+with open('deaths.csv', 'w', newline = '') as deaths:
+    writer = csv.writer(deaths)
 
 # Checking number of rows and columns in each dataset is equal to 400 (as specified in instructions)
 print("Rows in parish list = " + str(len(pop1))) # 400
@@ -170,17 +171,8 @@ for row in range(nrows):
     for col in range(ncols):
         # Append value to rowlist:
         rowlist.append(death_calc(pop1[row][col], rats_caught[row][col]))
-    # 
     deaths.append(rowlist)
-'''        
-        # d = rats_caught[row][col] ** 0.8
-        # if d == 0:
-        #     # 50% death
-        #     deaths = parish[row][col] / 2
-        # else:
-        #     deaths = parish[row][col] ** 1.3 / d
-        # rowlist.append(deaths)
-'''        
+
 # Checking death map data looks as expected
 type(deaths)
 #print(deaths)
@@ -228,97 +220,6 @@ environment.append(rowlist)
 matplotlib.pyplot.imshow(deaths)
 matplotlib.pyplot.show()
 
-'''
-NumPy method
-'''
-'''
-# Writing to empty file
-with open('deaths.csv', 'w', newline='') as f:  
-# Hadamard (element-wise) multiplication of parish and rats data using the numpy module
-    numpy.multiply(parish, catch_area)
-    print(numpy.multiply(parish, catch_area))
-    1.04 * numpy.array(environment)
-    print(1.04 * numpy.array(environment))
-    # Testing
-    5.01 * numpy.array(environment)
-    print(5.01 * numpy.array(environment))
-'''    
-    
-'''    
-# Creating scalar variable for deaths calculations
-    scalar = 1.04
-# Multiplying by 1.04 as in deaths formula
-    numpy.multiply(scalar, environment)
-# Printing result
-    print(numpy.multiply(scalar, environment))
-# Testing calculation method
-    scalar2 = 2.0
-    numpy.multiply(scalar2, environment)
-    print(numpy.multiply(scalar2, environment))
-    scalar3 = 3
-    numpy.multiply(scalar3, environment)
-    print(numpy.multiply(scalar3, environment))
-'''
-
-'''
-    # Within the environment:
-    reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)   
-    # For each row:
-    for row in reader:
-        # Create an empty list:
-        rowlist = []
-        # For each value in the row:
-        for value in row:
-            
-            d = 1.04*p*r     # need to             
-            value = d
-            
-            # Append the value to the rowlist:
-            rowlist.append(value)
-            #print(value)
-        environment.append(rowlist)
-# Multiply new array by 1.04 to find the deaths
-'''
-
-'''
-    numpy.multiply(1.04 * environment)  # TypeError: can't multiply sequence by non-int of type 'float'
-
-# Test using equivalent method
-    print(parish * catch_area)  # TypeError: can't multiply sequence by non-int of type 'list'
-
-
-
-    writer = csv.writer(f, delimiter=' ')           # include delimiter command only if want to create space-delimited instead of csv
-    for row in data:         
-        writer.writerow(row)
-
-
-deaths.txt[0,0] = 1.04*death.parishes.txt[0,0]*death.rats.txt[0,0]
-deaths.txt[i,i] = 1.04*death.parishes.txt[i,i]*death.rats.txt[i,i]
-# file1[i,i] = 1.04*file2[i,i]*file3[i,i]
-
-
-with open('death.parishes.txt', 'w') as f_p, open('death.rats.txt', 'w') as f_r:
-    # Within the environment:
-    reader = csv.reader(f, quoting=csv.QUOTE_NONNUMERIC)   
-    # For each row:
-    for row in reader:
-        # Create an empty list:
-        rowlist = []
-        # For each value in the row:
-        for value in row:
-            d = 1.04*p*r     # need to 
-            value = d
-            # Append the value to the rowlist:
-            rowlist.append(value)
-            #print(value)
-        environment.append(rowlist)
-       
-        
-for value in row:
-            # replace value with d - write function?
-        
-'''         
 
 '''
 III. Creating maps for subsequent weeks
