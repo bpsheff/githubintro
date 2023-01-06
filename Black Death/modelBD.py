@@ -180,8 +180,8 @@ type(deaths)
 '''
 # Testing
 
-# Using a larger float value to check multiplication works:
-for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
+# Using a larger float value to check formula works:
+for row in range(nrows):   
     for col in range(ncols):
         rowlist.append(5.04 * parish[row][col] * catch_area[row][col])
 deaths.append(rowlist)
@@ -243,21 +243,12 @@ count = 0
 def survivors(pop_prev, rats):
     # Calculating population after week 1 deaths:
     pop = pop_prev - deaths
-'''
-    # # Setting up conditional to distinguish/pick out
-    # if pop > 0:
-    #     rowlist.append(int(pop))
-    #     count = count + 1
-    # # Ensuring remaining parish populations cannot be negative:
-    # else:
-    #     rowlist.append(0)
-'''
     
 # For each row:
 for row in range(nrows):
     # Create empty list:
     rowlist = []
-    # For each value in row:     # 'column' not 'value'?
+    # For each value in row:     
     for col in range(ncols):
         # Setting up conditional to distinguish/pick out
         if pop2 > 0:
@@ -266,79 +257,10 @@ for row in range(nrows):
         # Ensuring remaining parish populations cannot be negative:
         else:
             rowlist.append(0)
-    # 
     pop2.append(rowlist)
 # 
 print(count)
 
-# 
-#print(pop2)
-
-'''
-        # # Calculating population after week 1 deaths:
-        # pop2 = pop1[row][col] - deaths[row][col]
-'''
-
-'''
-# For each row:
-for row in range(nrows):
-    # Create empty list:
-    rowlist = []
-    # For each value in row:     # 'column' not 'value'?
-    for col in range(ncols):
-        # Calculating population after week 1 deaths:
-        pop2 = pop1[row][col] - deaths[row][col]
-        # Setting up conditional to distinguish/pick out
-        if pop2 > 0:
-            rowlist.append(int(pop2))
-            count = count + 1
-        # Ensuring remaining parish populations cannot be negative:
-        else:
-            rowlist.append(0)
-    # 
-    pop2.append(rowlist)
-
-'''
-
-'''
-# Testing
-
-# Using a larger float value to check multiplication works:
-for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
-    for col in range(ncols):
-        rowlist.append(5.04 * parish[row][col] * catch_area[row][col])
-environment.append(rowlist)
-print(environment)   # values all seem to be larger by a factor of ~5, as expected
-
-
-
-# Using len(rats) instead of len(parish)
-
-nrows = len(catch_area) 
-ncols = len(catch_area)
-
-for row in nrows:
-
-for col in ncols:
-
-rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
-
-environment.append(rowlist)
-
-
-# Setting row and column lengths manually
-
-nrows = 400 
-ncols = 400
-
-for row in nrows:
-
-for col in ncols:
-
-rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
-
-environment.append(rowlist)
-'''
 # Displaying map of parish population at the beginning of week 2
 matplotlib.pyplot.imshow(pop2)
 matplotlib.pyplot.show()
@@ -351,15 +273,12 @@ deaths2 = []
 for row in range(nrows):
     # Create an empty list:
     rowlist = []
-    # For each value in the row:     # 'column' not 'value'?
+    # For each value in the row:     
     for col in range(ncols):
         # Append value to rowlist:
         rowlist.append(death_calc(pop2[row][col], rats_caught[row][col]))
         #rowlist.append(1.04 * pop2[row][col] * rats_caught[row][col])
-    # 
     deaths2.append(rowlist)
-# 
-#print(deaths2)
 
 # Displaying map of deaths
 matplotlib.pyplot.imshow(deaths2)
@@ -386,7 +305,7 @@ count = 0
 for row in range(nrows):
     # Create empty list:
     rowlist = []
-    # For each value in row:     # 'column' not 'value'?
+    # For each value in row:     
     for col in range(ncols):
         # Setting up conditional to distinguish/pick out
         if pop3 > 0:
@@ -395,64 +314,8 @@ for row in range(nrows):
         # Ensuring remaining parish populations cannot be negative:
         else:
             rowlist.append(0)
-    # 
     pop3.append(rowlist)
-# 
 print(count)
-
-'''
-# For each row:
-for row in range(nrows):
-    # Create an empty list:
-    rowlist = []
-    # For each value in the row:     # 'column' not 'value'?
-    for col in range(ncols):
-        # Append value to rowlist:
-        rowlist.append(pop2[row][col] - deaths2[row][col])
-    # 
-    pop3.append(rowlist)
-'''
-'''
-# Testing
-
-# Using a larger float value to check multiplication works:
-for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
-    for col in range(ncols):
-        rowlist.append(5.04 * parish[row][col] * catch_area[row][col])
-environment.append(rowlist)
-print(environment)   # values all seem to be larger by a factor of ~5, as expected
-
-
-
-# Using len(rats) instead of len(parish)
-
-nrows = len(catch_area) 
-ncols = len(catch_area)
-
-for row in nrows:
-
-for col in ncols:
-
-rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
-
-environment.append(rowlist)
-
-
-# Setting row and column lengths manually
-
-nrows = 400 
-ncols = 400
-
-for row in nrows:
-
-for col in ncols:
-
-rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
-
-environment.append(rowlist)
-'''
-
-type(pop3)
 
 # Displaying map of parish population at the beginning of week 3
 matplotlib.pyplot.imshow(pop3)
@@ -466,15 +329,12 @@ deaths3 = []
 for row in range(nrows):
     # Create an empty list:
     rowlist = []
-    # For each value in the row:     # 'column' not 'value'?
+    # For each value in the row:     
     for col in range(ncols):
         # Append value to rowlist:
         rowlist.append(death_calc(pop3[row][col], rats_caught[row][col]))
         #rowlist.append(1.04 * pop3[row][col] * rats_caught[row][col])
-    # 
     deaths3.append(rowlist)
-# 
-#print(deaths3)
 
 # Displaying map of deaths
 matplotlib.pyplot.imshow(deaths3)
@@ -501,7 +361,7 @@ count = 0
 for row in range(nrows):
     # Create empty list:
     rowlist = []
-    # For each value in row:     # 'column' not 'value'?
+    # For each value in row:    
     for col in range(ncols):
         # Setting up conditional to distinguish/pick out
         if pop4 > 0:
@@ -510,76 +370,5 @@ for row in range(nrows):
         # Ensuring remaining parish populations cannot be negative:
         else:
             rowlist.append(0)
-    # 
     pop4.append(rowlist)
-# 
 print(count)
-
-'''
-# Testing
-
-# Using a larger float value to check multiplication works:
-for row in range(nrows):   # TypeError: 'int' object is not iterable - convert to floats?
-    for col in range(ncols):
-        rowlist.append(5.04 * parish[row][col] * catch_area[row][col])
-environment.append(rowlist)
-print(environment)   # values all seem to be larger by a factor of ~5, as expected
-
-
-
-# Using len(rats) instead of len(parish)
-
-nrows = len(catch_area) 
-ncols = len(catch_area)
-
-for row in nrows:
-
-for col in ncols:
-
-rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
-
-environment.append(rowlist)
-
-
-# Setting row and column lengths manually
-
-nrows = 400 
-ncols = 400
-
-for row in nrows:
-
-for col in ncols:
-
-rowlist.append(death.parishes.txt[row][col] + death.rats.txt[row][col])
-
-environment.append(rowlist)
-'''
-"""
-type(pop4)
-
-# Displaying map of parish population at the beginning of week 4
-matplotlib.pyplot.imshow(pop4)
-matplotlib.pyplot.show()
-
-# From here we can create a map of deaths for week 4, using the same formula as before, assuming number of rats in each area doesn't change
-# Creating the environment for week 4
-environment4 = []
-
-# For each row:
-for row in range(nrows):
-    # Create an empty list:
-    rowlist = []
-    # For each value in the row:     # 'column' not 'value'?
-    for col in range(ncols):
-        # Append value to rowlist:
-        pop3
-        rowlist.append(1.04 * pop4[row][col] * catch_area[row][col])
-    # 
-    environment4.append(rowlist)
-# 
-print(environment4)
-
-# Displaying map of deaths
-matplotlib.pyplot.imshow(environment4)
-matplotlib.pyplot.show()
-"""
